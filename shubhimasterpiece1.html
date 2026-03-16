@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Shubhi ❤️ Akash</title>
+
+<style>
+
+body{
+margin:0;
+font-family:'Segoe UI',sans-serif;
+background:black;
+color:white;
+text-align:center;
+overflow:hidden;
+}
+
+/* Galaxy background */
+
+#galaxy{
+position:fixed;
+width:100%;
+height:100%;
+background:black;
+z-index:-1;
+}
+
+.star{
+position:absolute;
+width:2px;
+height:2px;
+background:white;
+animation:twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle{
+from{opacity:0.2;}
+to{opacity:1;}
+}
+
+/* Intro */
+
+#intro{
+height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+}
+
+#intro h1{
+font-size:80px;
+color:#ff4da6;
+letter-spacing:5px;
+animation:glow 2s infinite alternate;
+}
+
+@keyframes glow{
+from{text-shadow:0 0 10px #ff4da6;}
+to{text-shadow:0 0 40px #ff4da6;}
+}
+
+button{
+padding:15px 30px;
+border:none;
+border-radius:30px;
+background:#ff0066;
+color:white;
+font-size:18px;
+cursor:pointer;
+margin-top:20px;
+}
+
+button:hover{
+background:#ff3385;
+}
+
+/* Story section */
+
+#story{
+display:none;
+background:linear-gradient(135deg,#ffd6eb,#ff9ecf);
+height:100vh;
+padding-top:100px;
+color:#333;
+}
+
+.storyBox{
+background:white;
+width:60%;
+margin:auto;
+padding:30px;
+border-radius:20px;
+box-shadow:0 10px 25px rgba(0,0,0,0.2);
+font-size:22px;
+line-height:1.7;
+}
+
+#text{
+border-right:3px solid #ff0066;
+white-space:pre-wrap;
+overflow:hidden;
+}
+
+/* Hearts */
+
+.heart{
+position:absolute;
+color:#ff0066;
+animation:float 6s linear infinite;
+}
+
+@keyframes float{
+0%{transform:translateY(100vh);}
+100%{transform:translateY(-10vh);}
+}
+
+/* Dancing animals */
+
+.dancer{
+position:absolute;
+font-size:70px;
+animation:dance 1s infinite alternate;
+}
+
+@keyframes dance{
+0%{transform:rotate(-10deg);}
+100%{transform:rotate(10deg);}
+}
+
+.panda{left:5%;bottom:20px;}
+.cat{right:5%;bottom:20px;}
+
+/* Game */
+
+#gameHeart{
+position:absolute;
+font-size:40px;
+cursor:pointer;
+}
+
+.score{
+color:#ff0066;
+font-size:22px;
+margin-top:10px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="galaxy"></div>
+
+<!-- Intro -->
+
+<div id="intro">
+
+<h1>Shubhi ❤️ Akash</h1>
+<p>A Little Love Story</p>
+
+<button onclick="startStory()">Start The Story 🎬</button>
+
+</div>
+
+<!-- Story -->
+
+<div id="story">
+
+<div class="storyBox">
+
+<p id="text"></p>
+
+<button onclick="forgive()">Forgive Me 💖</button>
+<button onclick="secret()">Secret Message 🎁</button>
+
+<div class="score">Game Score: <span id="score">0</span></div>
+
+</div>
+
+</div>
+
+<!-- Animals -->
+
+<div class="dancer panda">🐼</div>
+<div class="dancer cat">🐱</div>
+
+<!-- Game -->
+
+<div id="gameHeart">💗</div>
+
+<!-- Music -->
+
+<audio autoplay loop>
+<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_2cbe7c7b41.mp3">
+</audio>
+
+<script>
+
+/* Galaxy stars */
+
+for(let i=0;i<150;i++){
+let star=document.createElement("div");
+star.className="star";
+star.style.left=Math.random()*100+"vw";
+star.style.top=Math.random()*100+"vh";
+star.style.animationDuration=(1+Math.random()*3)+"s";
+document.getElementById("galaxy").appendChild(star);
+}
+
+/* Floating hearts */
+
+for(let i=0;i<25;i++){
+let heart=document.createElement("div");
+heart.className="heart";
+heart.innerHTML="💗";
+heart.style.left=Math.random()*100+"vw";
+heart.style.fontSize=(20+Math.random()*30)+"px";
+heart.style.animationDuration=(3+Math.random()*4)+"s";
+document.body.appendChild(heart);
+}
+
+/* Start story */
+
+function startStory(){
+document.getElementById("intro").style.display="none";
+document.getElementById("story").style.display="block";
+typeWriter();
+}
+
+/* Typewriter letter */
+
+let message=`Dear Shubhi,
+
+I know you are angry with me and I truly regret hurting you.
+
+You are someone very special in my life and your happiness means everything to me.
+
+I made this little website just to show how much I care about you.
+
+Even the pandas and cats are dancing because they want you to smile again.
+
+Please forgive me.
+
+— Akash ❤️`;
+
+let i=0;
+
+function typeWriter(){
+if(i<message.length){
+document.getElementById("text").innerHTML+=message.charAt(i);
+i++;
+setTimeout(typeWriter,40);
+}
+}
+
+/* Game */
+
+let heart=document.getElementById("gameHeart");
+let score=0;
+
+function moveHeart(){
+let x=Math.random()*window.innerWidth;
+let y=Math.random()*window.innerHeight;
+heart.style.left=x+"px";
+heart.style.top=y+"px";
+}
+
+heart.onclick=function(){
+score++;
+document.getElementById("score").innerText=score;
+moveHeart();
+}
+
+setInterval(moveHeart,1500);
+
+/* Buttons */
+
+function forgive(){
+alert("Shubhi forgave Akash ❤️");
+}
+
+function secret(){
+alert("Shubhi, you are the best thing in my life 💖");
+}
+
+</script>
+
+</body>
+</html>
